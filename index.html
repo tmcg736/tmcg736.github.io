@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Geography 774 - tmcg736</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+			
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Lab 1</a>
+                    </li>
+                    <li>
+                        <a href="Pages/Lab2Finish.html">Lab 2</a>
+                    </li>
+                    <li>
+                        <a href="Pages/Lab3.html">Lab 3</a>
+                    </li>
+					<li>
+						<a href="#">Lab 4</a>
+					</li>
+					<li>
+						<a href="#">Lab 5</a>
+					</li>
+					<li>
+						<a href="#">Project</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Welcome to Geography 774!</h1>
+				<p class="lead">Presented By Taylor McGlone</p>
+                <p class="lead">Lab 1 Website Design, Github and Revisiting Web Mapping with Leaflet & geoJSON</p>
+				<div id="mapid" style="width: 700px; height: 600px;" class="container"></div>
+<script>
+
+	var mymap = L.map('mapid').setView([-37.01, 174.787], 14);
+
+	L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+	}).addTo(mymap);
+
+	L.marker([-37.01, 174.787]).addTo(mymap)
+		.bindPopup("<b>Auckland Airport</b>").openPopup();
+
+var AucklandAirport = {	
+
+"type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              174.7718063218202,
+              -37.00691779881938,
+              0
+            ],
+            [
+              174.7736281622769,
+              -37.00786475853582,
+              0
+            ],
+            [
+              174.7748359017439,
+              -37.01247906284931,
+              0
+            ],
+            [
+              174.7725446825191,
+              -37.01365114482467,
+              0
+            ],
+            [
+              174.7662298847297,
+              -37.01492732336035,
+              0
+            ],
+            [
+              174.7648026934626,
+              -37.01602545253784,
+              0
+            ],
+            [
+              174.764479289108,
+              -37.01740672664168,
+              0
+            ],
+            [
+              174.7655858116218,
+              -37.01849913313627,
+              0
+            ],
+            [
+              174.7673156203501,
+              -37.01875699596891,
+              0
+            ],
+            [
+              174.7924748741772,
+              -37.01174689081412,
+              0
+            ],
+            [
+              174.794293269911,
+              -37.01188558791544,
+              0
+            ],
+            [
+              174.7979887952366,
+              -37.01194824007221,
+              0
+            ],
+            [
+              174.802697899982,
+              -37.01200855621945,
+              0
+            ],
+            [
+              174.8061838221501,
+              -37.01140630399981,
+              0
+            ],
+            [
+              174.8085312013,
+              -37.0096155821602,
+              0
+            ],
+            [
+              174.8089959546115,
+              -37.00668700889992,
+              0
+            ],
+            [
+              174.808272741389,
+              -37.00480856936666,
+              0
+            ],
+            [
+              174.8058171284653,
+              -37.00186372816939,
+              0
+            ],
+            [
+              174.8038516236156,
+              -37.00205916531052,
+              0
+            ],
+            [
+              174.8003874182787,
+              -37.00113774915813,
+              0
+            ],
+            [
+              174.7978842980921,
+              -37.00164180961293,
+              0
+            ],
+            [
+              174.7975268012139,
+              -37.00171378890516,
+              0
+            ],
+            [
+              174.7945500925875,
+              -37.00271767586985,
+              0
+            ],
+            [
+              174.7914549971413,
+              -37.0033418139815,
+              0
+            ],
+            [
+              174.7901088284774,
+              -37.00189280373543,
+              0
+            ],
+            [
+              174.7869855862307,
+              -37.00242083384524,
+              0
+            ],
+            [
+              174.786695114541,
+              -37.00430005655219,
+              0
+            ],
+            [
+              174.784137487128,
+              -37.00461258751118,
+              0
+            ],
+            [
+              174.7807129224488,
+              -37.00338290744276,
+              0
+            ],
+            [
+              174.7712387166575,
+              -37.00510690404917,
+              0
+            ],
+            [
+              174.7718063218202,
+              -37.00691779881938,
+              0
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "AucklandAirport"
+      }
+    }
+  ]
+}
+
+var PolygonStyle = {
+    "color": "#ff6666",
+    "weight": 2
+};
+
+
+
+L.geoJson(AucklandAirport, { style:PolygonStyle}).addTo(mymap);
+
+</script>
+                <ul class="list-unstyled">
+                    <li>Built with Bootstrap v3.3.7</li>
+                    <li>Built with jQuery v1.11.1</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
