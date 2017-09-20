@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Geography 774 - tmcg736</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+			
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href= "../Pages/index.html">Lab 1</a>
+                    </li>
+                    <li>
+                        <a href="Lab2Finish.html">Lab 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Lab 3</a>
+                    </li>
+					<li>
+						<a href="#">Lab 4</a>
+					</li>
+					<li>
+						<a href="#">Lab 5</a>
+					</li>
+					<li>
+						<a href="#">Project</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="lead">Lab 3 Mapbox The Great Walks of New Zealand</p>
+
+<div id='map1' style='width: 500px; height: 700px; float:left;'></div>
+<div id='map2' style='width: 500px; height: 700px; float:right;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidG1jZzczNiIsImEiOiJjajZ6aG40MTIwNmZsMnhtdG1lb29scmY2In0.OtFbT5g8AKy2tWcm0awfhg';
+var map1 = new mapboxgl.Map({
+    container: 'map1',
+    style: 'mapbox://styles/tmcg736/cj6zm4g27c1rg2ro10hitrduw',
+	center:[179,-41],
+	zoom: 4.05
+});
+mapboxgl.accessToken = 'pk.eyJ1IjoidG1jZzczNiIsImEiOiJjajZ6aG40MTIwNmZsMnhtdG1lb29scmY2In0.OtFbT5g8AKy2tWcm0awfhg';
+var map2 = new mapboxgl.Map({
+    container: 'map2',
+    style: 'mapbox://styles/tmcg736/cj6zqyuj91qyv2sll4eebncxh',
+	center:[179,-41],
+	zoom: 4.05,
+
+	});
+map2.on('load', function (){
+map2.addSource('tracks',{
+type:'vector',
+url:'tmcg736.cj7s808p811np2wqr4t0dwvi3-5sf1o'
+})
+});	
+
+map2.addLayer({
+"id":"greatwalksplan",
+"type":"line",
+"source":"tracks",
+"source-layer":"greatwalksplan",
+"layout":{
+"visibility":"visible",
+"line-join":"round",
+"line-cap":"round"
+},
+"paint":{
+"line-color":"#fc0000",
+"line-width":2
+}
+});
+
+map2.setLayerZoomRange (map2,4,22);
+
+map2.addSource("markers",{
+"type":"geojson",
+"data": {
+  "type": "FeatureCollection",
+  "features": [
+  {
+  
+
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Lake Waikaremoana"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          176.9952392578125,
+          -38.77121637244271
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Tongariro Northern Circuit"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          175.58349609375,
+          -39.151362679490305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Heaphy Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          172.24365234374997,
+          -40.87614141141368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Abel Tasman Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          173.03192138671875,
+          -40.863679665481676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Routeburn Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.167724609375,
+          -44.762336674810996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Milford Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.76123046875,
+          -44.78963254761407
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Kelper Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          167.51678466796875,
+          -45.40423540168334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#838384",
+        "marker-size": "medium",
+        "marker-symbol": "if_pocket_marker",
+        "title": "Rakiura Track"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          168.0523681640625,
+          -46.87896833507684
+        ]
+      }
+    }
+  ]
+}
+});
+
+map2.addLayer({
+"id":"markers",
+"type":"symbol",
+"source":"markers",
+"layout":{
+"icon-image":"{if_pockect_marker}",
+"text-field":"{DESCRIPTIO}",
+"text-font":["Open Sans Semibold", "Arial Unicode MS Bold"],
+"text-offset":[0,0.6],
+"text-size":11,
+"text-anchor":"top"
+}
+});
+
+map2.on('click', function (e) {
+var features = map2.queryRenderedFeatures(e.point, {layers:['markers']});
+map2.getCanvas().style.cursor = features.length ? 'pointer':'';
+});
+
+map2.on('click', function (e) {
+var features = map2.queryRenderedFeatures(e.point,{ layers: ['markers']});
+if (features.length){
+map2.flyTo({center: features[0].geometry.coordinates,zoom:00});
+}
+});
+
+</script>	
+
+</body>
