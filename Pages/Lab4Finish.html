@@ -1,0 +1,214 @@
+<<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Geography 774 - tmcg736</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+
+<style>
+	.info {
+    padding: 6px;
+    font: 14px Arial, sans-serif;
+    background: white;
+    background: rgba(242,242,242,0.8);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: black;
+}
+.legend {
+    line-height: 18px;
+    color: black;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 10px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+			
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href= "../Pages/index.html">Lab 1</a>
+                    </li>
+                    <li>
+                        <a href="Lab2Finish.html">Lab 2</a>
+                    </li>
+                    <li>
+                        <a href="Lab3Finish.html">Lab 3</a>
+                    </li>
+					<li>
+						<a href="#">Lab 4</a>
+					</li>
+					<li>
+						<a href="#">Lab 5</a>
+					</li>
+					<li>
+						<a href="#">Project</a>
+					</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p class="lead">Lab 4 Hexbin Mapping of Structural Fires 2013-2016</p>
+				
+				
+<div id= "map_1"style="width: 1000px; height: 700px; margin:0 auto; "></div>
+<script type="text/javascript" src="js/Auck_FireCount_EditSection.js"></script>
+<script>
+var map = L.map('map_1').setView([-36.9, 174.78], 10.4);
+
+L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>, Fire Incidents Data from <a href="https://fireandemergency.nz/" target="_blank">New Zealand Fire Service</a>'
+}).addTo(map);
+
+	function getColor(d) {
+    return  d > 100 ? '#91003f' :
+            d > 60  ? '#ce1256' :
+            d > 30  ? '#e7298a' :
+			d > 20  ? '#df65b0' :
+            d > 10  ? '#c994c7' :
+            d > 5   ? '#d4b9da' :
+            d > 0   ? '#e7e1ef' :
+                      '#f7f4f9';
+}
+
+
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.FireCount),
+        weight: 1,
+        opacity: 0.8,
+        color: 'white',
+        fillOpacity: 0.75
+    };
+}
+
+function highlightFeature(e) {
+var layer = e.target;
+
+layer.setStyle({
+weight:2,
+color:'black',
+dashArray:'',
+fillOpacity:0.8
+});
+
+if(!L.Browser.ie && !L.Browser.opera && !L.Browser.edge){
+layer.bringToFront();
+}
+info.update(layer.feature.properties);
+}
+function resetHighlight(e){
+geojson.resetStyle(e.target);
+}
+
+function onEachFeature(feature, layer){
+layer.on({
+mouseover: highlightFeature,
+mouseout: resetHighlight,
+});
+}
+
+geojson = L.geoJson(Auck_hex, {
+style: style,
+onEachFeature: onEachFeature
+}).addTo(map);
+
+var info = L.control();
+
+info.onAdd = function (map){
+this._div = L.DomUtil.create('div','info');
+this.update();
+return this._div;
+};
+
+info.update = function (props) {
+this._div.innerHTML = '<h4>Reported Number of Structural Fires</h4>' +  (props ?
+        props.FireCount + ' fires'
+        : 'Hover over a region');
+};
+
+info.addTo(map);
+
+var legend=L.control({position:'bottomleft'});
+
+legend.onAdd = function (map){
+
+var div = L.DomUtil.create('div', 'info legend'),
+grades = [0,1,6,11,21,31,61,101],
+key_labels = ["0","1-5","6-10","11-20","21-30","31-60","61-100",">100"],
+  labels = ["Reported Structural Fires 2013-2016"],
+  from, to;
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+    labels.push(
+    '<i style="background:' + getColor(from) + '"></i> ' +
+       key_labels[i]);
+    }
+      div.innerHTML = labels.join('<br>');
+      return div;
+      };
+      legend.addTo(map);
+</script>	
+
+</body>
