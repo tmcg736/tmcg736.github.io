@@ -2,6 +2,15 @@
 <meta charset="utf-8">
 <style>
 	
+.d3-tip {
+  line-height: 1.5;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 0px;
+  text-align: center;
+}
+	
 .states {
   fill: none;
   stroke: black;
@@ -67,6 +76,16 @@ g.call(d3.axisBottom(x)
   .select(".domain")
     .remove();
 
+	tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .direction('n')
+  .html(function(d) {
+    return nameById.get(d.id)
+ });
+    
+svg.call(tip);
+	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
