@@ -84,7 +84,7 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
-      .text(function(d) { return d.twentyfifteen + "%"; })
+      .text(function(d) { return d.name.twentyfifteen + "%"; })
 
 
   svg.append("path")
@@ -104,7 +104,7 @@ function readytwentyten(error, us) {
       .attr("fill", function(d) { return color(d.twentyten = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
-      .text(function(d) { return d.twentyten + "%"; })
+      .text(function(d) { return d.name.twentyten + "%"; })
 
 
   svg.append("path")
