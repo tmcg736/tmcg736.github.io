@@ -69,9 +69,9 @@ g.call(d3.axisBottom(x)
     .remove();
 
 d3.queue()
-    .defer(d3.json, "https://d3js.org/us-10m.v1.json")
-    .defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.2015); })
-    .await(ready);
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.2015); })
+	.await(ready);
 
 function ready(error, us) {
   if (error) throw error;
