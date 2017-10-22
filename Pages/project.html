@@ -102,7 +102,9 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
-      .text(function(d) { return d.twentyfifteen + "%"; });
+      .text(function(d) { return d.twentyfifteen + "%"; })
+	      .on('mouseover',tip.show)
+      .on('mouseout', tip.hide);
 
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -121,7 +123,9 @@ function readytwentyten(error, us) {
       .attr("fill", function(d) { return color(d.twentyten = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
-      .text(function(d) { return d.twentyten + "%"; });
+      .text(function(d) { return d.twentyten + "%"; })
+	      .on('mouseover',tip.show)
+      .on('mouseout', tip.hide);
 
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
