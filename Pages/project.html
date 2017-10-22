@@ -9,7 +9,7 @@
 }
 .states	:hover {
 	stroke: black;
-	stroke-width: 3;
+	stroke-width: 2;
 }
 </style>
 <svg width="960" height="600"></svg>
@@ -27,7 +27,7 @@ var povertylevel = d3.map();
 var path = d3.geoPath();
 
 var x = d3.scaleLinear()
-    .domain([1, 10])
+    .domain([0, 20])
     .rangeRound([600, 860]);
 
 var color = d3.scaleThreshold()
