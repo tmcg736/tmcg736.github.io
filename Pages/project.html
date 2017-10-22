@@ -2,14 +2,6 @@
 <meta charset="utf-8">
 <style>
 	
-.d3-tip {
-  line-height: 1.5;
-  padding: 8px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 0px;
-  text-align: center;
-}
 	
 .states {
   fill: none;
@@ -24,8 +16,7 @@
 <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="https://d3js.org/topojson.v2.min.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>  
+<script src="https://d3js.org/topojson.v2.min.js"></script> 
 <script>
 
 var svg = d3.select("svg"),
@@ -76,16 +67,6 @@ g.call(d3.axisBottom(x)
     .tickValues(color.domain()))
   .select(".domain")
     .remove();
-
-	tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .direction('n')
-  .html(function(d) {
-    return nameById.get(d.id)
- });
-    
-svg.call(tip);
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
@@ -104,8 +85,7 @@ function ready(error, us) {
       .attr("d", path)
     .append("title")
       .text(function(d) { return d.twentyfifteen + "%"; })
-	      .on('mouseover',tip.show)
-      .on('mouseout', tip.hide);
+
 
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -125,8 +105,7 @@ function readytwentyten(error, us) {
       .attr("d", path)
     .append("title")
       .text(function(d) { return d.twentyten + "%"; })
-	      .on('mouseover',tip.show)
-      .on('mouseout', tip.hide);
+
 
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
