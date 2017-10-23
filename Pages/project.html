@@ -23,9 +23,20 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
+var projection = d3.geo.albersUsa()
+    .scale(1070)
+    .translate([width / 2, height / 2]);	
+	
 var povertylevel = d3.map();
 
-var path = d3.geoPath();
+var path = d3.geoPath()
+.projection(projection);
+	
+var zoom = d3.behavior.zoom()
+    .translate(projection.translate())
+    .scale(projection.scale())
+    .scaleExtent([height, 8 * height])
+    .on("zoom", zoomed);
 
 var x = d3.scaleLinear()
     .domain([0, 20])
@@ -37,7 +48,8 @@ var color = d3.scaleThreshold()
 
 var g = svg.append("g")
     .attr("class", "key")
-    .attr("transform", "translate(0,40)");
+    .attr("transform", "translate(0,40)")
+.call(zoom);
 
 g.selectAll("rect")
   .data(color.range().map(function(d) {
@@ -84,6 +96,7 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
+	.on("click", clicked)
       .text(function(d) { return d.twentyfifteen + "%"; })
 
 
@@ -91,6 +104,27 @@ function ready(error, us) {
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path);
+}
+
+function clicked(d) {
+  var centroid = path.centroid(d),
+      translate = projection.translate();
+
+  projection.translate([
+    translate[0] - centroid[0] + width / 2,
+    translate[1] - centroid[1] + height / 2
+  ]);
+
+  zoom.translate(projection.translate());
+
+  g.selectAll("path").transition()
+      .duration(700)
+      .attr("d", path);
+}
+
+function zoomed() {
+  projection.translate(d3.event.translate).scale(d3.event.scale);
+  g.selectAll("path").attr("d", path);
 }
 
 function readytwentyten(error, us) {
