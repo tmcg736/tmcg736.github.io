@@ -12,14 +12,15 @@
 	stroke: black;
 	stroke-width: 3;
 }
+
 </style>
 <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script> 
 
-<button id="poverty2015" onclick='update(ready)'>Poverty Level 2015</button>
-<button id="poverty2010" onclick='update(twentyten)'>Poverty Level 2010</button>
+<button id="poverty2015" onclick='povertytwentyfifteen()'>Poverty Level 2015</button>
+<button id="poverty2010" onclick='twentyten()'>Poverty Level 2010</button>
 
 <script>	
 var svg = d3.select("svg"),
@@ -109,5 +110,15 @@ function readytwentyten(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
-
+function povertytwentyfifteen() {
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
+	.await(ready);
+}
+function povertytwentyten() {
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.twentyten); })
+	.await(ready);
 </script>
