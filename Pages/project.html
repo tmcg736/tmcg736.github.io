@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-	
-	
-.states {
+.background {
   fill: none;
-  stroke: black;
+  pointer-events: all;
+}
+
+.feature {
+  fill: #ccc;
+  cursor: pointer;
+}
+
+.feature.active {
+  fill: orange;
+}
+
+.mesh {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
   stroke-linejoin: round;
 }
-.states	:hover {
-	stroke: black;
-	stroke-width: 3;
-}
+
 </style>
 <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
