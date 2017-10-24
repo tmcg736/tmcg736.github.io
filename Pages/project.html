@@ -18,8 +18,8 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script> 
 
-<button id="poverty2015" onclick='ready()'>Poverty Level 2015</button>
-<button id="poverty2010" onclick='readytwentyten()'>Poverty Level 2010</button>
+<button id="poverty2015" onclick='update(ready)'>Poverty Level 2015</button>
+<button id="poverty2010" onclick='update(twentyten)'>Poverty Level 2010</button>
 
 <script>	
 var svg = d3.select("svg"),
@@ -100,4 +100,8 @@ function readytwentyten(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
+  function update(arg) {
+    povertylevel.updateChoropleth(null, {reset: true});
+    povertylevel.updateChoropleth(arg);
+  }
 </script>
