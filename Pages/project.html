@@ -23,7 +23,7 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-	
+
 var povertylevel = d3.map();
 
 var path = d3.geoPath();
@@ -68,6 +68,15 @@ g.call(d3.axisBottom(x)
     .tickValues(color.domain()))
   .select(".domain")
     .remove();
+
+	
+var zoomSettings = {
+	duration: 1000,
+	ease: d3.easeCubicOut,
+	zoomLevel:5
+};
+
+
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
@@ -83,7 +92,7 @@ function ready(error, us) {
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
-      .attr("d", path)
+      .attr("d", path, 'cursor':'pointer' )
     .append("title")
       .text(function(d) { return d.twentyfifteen + "%"; })
 
