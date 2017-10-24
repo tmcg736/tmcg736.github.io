@@ -87,7 +87,7 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
-      .text(function(d) { return d.twentyfifteen + "%"; })
+      .text(function(d) { return d.name + "%"; })
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
