@@ -18,9 +18,8 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script> 
 
-<select id = "opts">
-<option value="ds1">Poverty Level 2015</option>
-<option value="ds2">Poverty Level 2010</option>
+<button id="poverty2015" onclick='updateCost(costChange)'>Poverty Level 2015</button>
+<button id="poverty2010" onclick='updateCost(rateChange)'>Poverty Level 2010</button>
 
 <script>	
 var svg = d3.select("svg"),
