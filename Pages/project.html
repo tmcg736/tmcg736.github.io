@@ -92,7 +92,8 @@ function ready(error, us) {
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
-      .attr("d", path, 'cursor':'pointer' )
+      .attr("d", path)
+	.attr('cursor':'pointer')
     .append("title")
       .text(function(d) { return d.twentyfifteen + "%"; })
 
