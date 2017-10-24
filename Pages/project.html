@@ -111,5 +111,4 @@ svg.selectAll(".place-label")
       .attr("dy", ".35em")
       .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
       .text(function(d) { return d.properties.name; });
-});
 </script>
