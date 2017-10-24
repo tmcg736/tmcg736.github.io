@@ -67,8 +67,10 @@ d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
 	.await(ready);
+	
 function ready(error, us) {
   if (error) throw error;
+	
   svg.append("g")
       .attr("class", "states")
     .selectAll("path")
@@ -99,4 +101,15 @@ function readytwentyten(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
+	
+svg.selectAll(".place-label")
+	.data(topojson.feature(us, us.objects.states).features)
+	.enter().append("text")
+	.attr("class", "place-label")
+      .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+      .attr("x", function(d) { return d.geometry.coordinates[0] > -1 ? 6 : -6; })
+      .attr("dy", ".35em")
+      .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
+      .text(function(d) { return d.properties.name; });
+});
 </script>
