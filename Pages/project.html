@@ -119,7 +119,7 @@ function readytwentyzeroone(error, us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-      .attr("fill", function(d) { return color(d.twentyzeroone = povertylevel.get(d.id)); })
+      .attr("fill", function(d) { return color(d.twentyzeronine = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
       .text(function(d) { return d.twentyten + "%"; })
@@ -145,7 +145,7 @@ function povertytwentyonetwo() {
 function povertytwentyzeronine() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "threeperiods.csv", function(d) { povertylevel.set(d.id, +d.twentyzeroone); })
+	.defer(d3.csv, "threeperiods.csv", function(d) { povertylevel.set(d.id, +d.twentyzeronine); })
 	.await(ready);
 }
 </script>
