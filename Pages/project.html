@@ -25,18 +25,23 @@
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
+	
 var povertylevel = d3.map();
+	
 var path = d3.geoPath();
 	
 var x = d3.scaleLinear()
     .domain([0, 20])
     .rangeRound([600, 860]);
+	
 var color = d3.scaleThreshold()
     .domain([5, 10, 15, 20])
     .range(["#f2f0f7", "#cbc9e2", "#9e9ac8", "#6a51a3"]);
+	
 var g = svg.append("g")
     .attr("class", "key")
     .attr("transform", "translate(0,40)");
+	
 g.selectAll("rect")
   .data(color.range().map(function(d) {
       d = color.invertExtent(d);
@@ -68,8 +73,10 @@ d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
 	.await(ready);
+	
 function ready(error, us) {
   if (error) throw error;
+	
   svg.append("g")
       .attr("class", "states")
     .selectAll("path")
@@ -84,8 +91,10 @@ function ready(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
+	
 function readytwentyten(error, us) {
   if (error) throw error;
+	
   svg.append("g")
       .attr("class", "states")
     .selectAll("path")
@@ -100,8 +109,5 @@ function readytwentyten(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
-  function update(arg) {
-    povertylevel.updateChoropleth(null, {reset: true});
-    povertylevel.updateChoropleth(arg);
-  }
+
 </script>
