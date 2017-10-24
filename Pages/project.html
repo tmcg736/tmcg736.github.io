@@ -68,36 +68,6 @@ g.call(d3.axisBottom(x)
     .tickValues(color.domain()))
   .select(".domain")
     .remove();
-
-	
-var zoomSettings = {
-	duration: 1000,
-	ease: d3.easeCubicOut,
-	zoomLevel:5
-};
-
-function clicked(d){
-	var x;
-	var y;
-	var zoomLevel;
-	
-	if(d && centered !== d) {
-		var centriod = path.centroid(d);
-		x = centroid[0];
-		y = centroid[0];
-		zoomLevel=zoomSettings.zoomLevel;
-		centered = d;
-	} else { 
-		x = width / 2;
-		y = height / 2;
-		zoomLevel = 1;
-		centered = null;
-	}
-		
-	g.transition()
-	.duration(zoomSettings.duration)
-	.ease(zoomSettings.ease)
-	.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + zoomeLevel + ')translate(' + -x + ',' + -y ')');
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
