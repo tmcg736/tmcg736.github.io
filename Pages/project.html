@@ -97,6 +97,25 @@ function ready(error, us) {
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path)
+	    .on("mouseover", function(d) {
+      var sel = d3.select(this);
+        sel.moveToFront();
+      d3.select(this).transition().duration(300).style("opacity", 0.8);
+      div.transition().duration(300)
+      .style("opacity", 1)
+      div.text(statewithid[d.id] + ": " + datawithid[d.id])
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY -30) + "px");
+    })
+    .on("mouseout", function() {
+      var sel = d3.select(this);
+        sel.moveToBack();
+      d3.select(this)
+      .transition().duration(300)
+      .style("opacity", 1);
+      div.transition().duration(300)
+      .style("opacity", 0);
+    });
 }
 function readytwentyonetwo(error, us) {
   if (error) throw error;
