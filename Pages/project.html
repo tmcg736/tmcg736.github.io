@@ -112,9 +112,8 @@ function ready(error, us) {
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
-      .attr("d", path);
-}
-  .on("mouseover", function(d) {
+      .attr("d", path)
+	  .on("mouseover", function(d) {
     d3.select(this).transition().duration(300).style("opacity", 1);
     div.transition().duration(300)
     .style("opacity", 1)
