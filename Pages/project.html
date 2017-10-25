@@ -115,6 +115,7 @@ var povertylevel = d3.map();
 	
 var path = d3.geoPath();
 	
+<!-- Scale Bar -->	
 var x = d3.scaleLinear()
     .domain([0, 20])
     .rangeRound([600, 860]);
@@ -153,7 +154,9 @@ g.call(d3.axisBottom(x)
     .tickValues(color.domain()))
   .select(".domain")
     .remove();
-	
+
+
+<!--Loads data the json file-->	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "threeperiods.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
@@ -210,6 +213,8 @@ function readytwentyzeroone(error, us) {
       .attr("class", "states")
       .attr("d", path);
 }
+
+<!--Loads data for different years from the csv when button clicked-->	
 function povertytwentyfifteen() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
