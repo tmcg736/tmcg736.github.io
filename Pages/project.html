@@ -76,11 +76,6 @@ d3.queue()
 	.defer(d3.csv, "threeperiods.csv", function(d) { povertylevel.set(d.id, +d.twentyfifteen); })
 	.await(ready);
 
-var datawithid = {};
-	maptemplate.forEach(function(d) { datawithid[d.id] = +d.twentyfifteen; });
-var statewithid = {};
-	maptemplate.forEach(function(d) { statewithid[d.id] = d.name;});
-
 function ready(error, us) {
   if (error) throw error;
 	
@@ -92,30 +87,12 @@ function ready(error, us) {
       .attr("fill", function(d) { return color(d.twentyfifteen = povertylevel.get(d.id)); })
       .attr("d", path)
     .append("title")
+	.text(function(d) {return d.name;})
       .text(function(d) { return d.twentyfifteen + "%"; })
   svg.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
       .attr("class", "states")
       .attr("d", path)
-	    .on("mouseover", function(d) {
-      var sel = d3.select(this);
-        sel.moveToFront();
-      d3.select(this).transition().duration(300).style("opacity", 0.8);
-      div.transition().duration(300)
-      .style("opacity", 1)
-      div.text(statewithid[d.id] + ": " + datawithid[d.id])
-      .style("left", (d3.event.pageX) + "px")
-      .style("top", (d3.event.pageY -30) + "px");
-    })
-    .on("mouseout", function() {
-      var sel = d3.select(this);
-        sel.moveToBack();
-      d3.select(this)
-      .transition().duration(300)
-      .style("opacity", 1);
-      div.transition().duration(300)
-      .style("opacity", 0);
-    });
 }
 function readytwentyonetwo(error, us) {
   if (error) throw error;
